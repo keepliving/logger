@@ -36,4 +36,8 @@ class FileOutput extends LogOutput {
     await _sink?.flush();
     await _sink?.close();
   }
+
+  void flush() async {
+    await _sink?.flush();
+  }
 }
