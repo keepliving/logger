@@ -10,11 +10,13 @@ class FileOutput extends LogOutput {
   final bool overrideExisting;
   final Encoding encoding;
   IOSink? _sink;
+  final bool alwaysFlush;
 
   FileOutput({
     required this.file,
     this.overrideExisting = false,
     this.encoding = utf8,
+    this.alwaysFlush = true,
   });
 
   @override
@@ -29,6 +31,9 @@ class FileOutput extends LogOutput {
   void output(OutputEvent event) {
     _sink?.writeAll(event.lines, '\n');
     _sink?.writeln();
+    if (alwaysFlush) {
+      _sink?.flush();
+    }
   }
 
   @override
